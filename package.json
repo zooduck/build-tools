@@ -1,0 +1,19 @@
+{
+  "name": "@zooduck/build-tools",
+  "version": "0.0.1",
+  "description": "Generic build tools",
+  "main": "dist/index.module.mjs",
+  "repository": {
+    "url": "git+https://github.com/zooduck/build-tools.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.mjs"
+  },
+  "author": "zooduck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zooduck/build-tools/issues"
+  },
+  "homepage": "https://github.com/zooduck/build-tools#readme"
+}
