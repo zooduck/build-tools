@@ -2,7 +2,7 @@
   "name": "@zooduck/build-tools",
   "version": "0.0.1",
   "description": "Generic build tools",
-  "main": "dist/index.module.mjs",
+  "main": "dist/index.module.js",
   "type": "module",
   "repository": {
     "url": "git+https://github.com/zooduck/build-tools.git"
