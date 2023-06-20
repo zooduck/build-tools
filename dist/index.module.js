@@ -12,12 +12,12 @@ class BuildTools {
       await fs.cp(src, dest, { recursive: true });
     }
   }
-  removeCommentsFromFile = async (filePath) => {
+  async removeCommentsFromFile(filePath) {
     const fileContents = await fs.readFile(filePath, { encoding: 'utf-8' });
     const fileContentsWithCommentsRemoved = this.#removeCommentsFromString(fileContents);
     await fs.writeFile(filePath, fileContentsWithCommentsRemoved);
   }
-  #removeCommentsFromString = (fileContents) => {
+  #removeCommentsFromString(fileContents) {
     const COMMENT_BLOCK_START_REGEX = /\s+\/\*|^\/\*/;
     const COMMENT_BLOCK_END_REGEX = /\*\//;
     const EMPTY_LINE_REGEX = /[\n\r]\s*$/gm;
