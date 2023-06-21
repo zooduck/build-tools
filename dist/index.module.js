@@ -1,5 +1,5 @@
 /* --------------------------- */
-/* @zooduck/build-tools v0.0.1 */
+/* @zooduck/build-tools v0.0.2 */
 /* --------------------------- */
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
