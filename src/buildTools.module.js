@@ -31,6 +31,26 @@ class BuildTools {
     await fs.writeFile(filePath, fileContentsWithCommentsRemoved);
   }
   /**
+   * @method
+   * @param {string} pathToFile
+   * @param {string} pathToPackageJSON
+   * @returns {Promise<void>}
+   */
+  async stampFileWithVersion(pathToFile, pathToPackageJSON) {
+    const pkg = await fs.readFile(pathToPackageJSON);
+    const { name, version } = JSON.parse(pkg);
+    const fileContents = await fs.readFile(pathToFile, { encoding: 'utf-8' });
+    const versionText = `${name} v${version}`;
+    const dashLine = Array.from({ length: versionText.length }).map(() => {
+      return '-';
+    }).join('');
+    const versionComment = `/* ${dashLine} */\n/* ${versionText} */\n/* ${dashLine} */`;
+    await fs.writeFile(
+      pathToFile,
+      `${versionComment}\n${fileContents}`
+    );
+  }
+  /**
    * @private
    * @method
    * @param {string} fileContents

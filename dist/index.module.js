@@ -1,3 +1,6 @@
+/* --------------------------- */
+/* @zooduck/build-tools v0.0.1 */
+/* --------------------------- */
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
 class BuildTools {
@@ -16,6 +19,20 @@ class BuildTools {
     const fileContents = await fs.readFile(filePath, { encoding: 'utf-8' });
     const fileContentsWithCommentsRemoved = this.#removeCommentsFromString(fileContents);
     await fs.writeFile(filePath, fileContentsWithCommentsRemoved);
+  }
+  async stampFileWithVersion(pathToFile, pathToPackageJSON) {
+    const pkg = await fs.readFile(pathToPackageJSON);
+    const { name, version } = JSON.parse(pkg);
+    const fileContents = await fs.readFile(pathToFile, { encoding: 'utf-8' });
+    const versionText = `${name} v${version}`;
+    const dashLine = Array.from({ length: versionText.length }).map(() => {
+      return '-';
+    }).join('');
+    const versionComment = `/* ${dashLine} */\n/* ${versionText} */\n/* ${dashLine} */`;
+    await fs.writeFile(
+      pathToFile,
+      `${versionComment}\n${fileContents}`
+    );
   }
   #removeCommentsFromString(fileContents) {
     const COMMENT_BLOCK_START_REGEX = /\s+\/\*|^\/\*/;
