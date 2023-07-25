@@ -15,6 +15,12 @@ class BuildTools {
       await fs.cp(src, dest, { recursive: true });
     }
   }
+  async createJSExportFromCSS(cssFile) {
+    const directory = path.dirname(cssFile);
+    const filename = path.basename(cssFile);
+    const fileContents = await fs.readFile(cssFile, { encoding: 'utf-8' });
+    fs.writeFile(path.join(directory, filename.replace('.css', '.css.js')), `export default \`\n${fileContents}\n\`;`);
+  };
   async removeCommentsFromFile(filePath) {
     const fileContents = await fs.readFile(filePath, { encoding: 'utf-8' });
     const fileContentsWithCommentsRemoved = this.#removeCommentsFromString(fileContents);
